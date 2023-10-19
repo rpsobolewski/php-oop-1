@@ -1,38 +1,43 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-class Movie
-{
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Film</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
-    public $title;
-    public $director;
-    public $year;
-    public $genres;
+<body>
+    <div class="container">
+        <h1 class="mt-5">Elenco Film</h1>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Titolo</th>
+                    <th>Regista</th>
+                    <th>Anno</th>
+                    <th>Generi</th>
+                </tr>
+            </thead>
+            <tbody>
 
+                <?php
 
-    public function __construct($title, $director, $year, ...$genres)
-    {
-        $this->title = $title;
-        $this->director = $director;
-        $this->year = $year;
-        $this->genres = $genres;
-    }
+                include('db.php');
+                foreach ($movies as $movie) {
+                    echo "<tr>";
+                    echo "<td>{$movie->title}</td>";
+                    echo "<td>{$movie->director}</td>";
+                    echo "<td>{$movie->year}</td>";
+                    echo "<td>" . implode(', ', $movie->genres) . "</td>";
+                    echo "</tr>";
+                }
 
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
 
-    public function getMovieInfo()
-    {
-        $genreString = implode(', ', $this->genres);
-        return "Titolo: {$this->title}, Regista: {$this->director}, Anno: {$this->year}, Generi: {$genreString}";
-    }
-}
-
-
-
-
-$movies = [];
-
-$movies[] = new Movie("Kill Bill: Volume 1", "Quentin Tarantino", 2003, "Azione", "Thriller");
-$movies[] = new Movie("The Matrix", "the Wachowskis", 1999, "Fantascienza", "Azione");
-
-foreach ($movies as $movie) {
-    echo $movie->getMovieInfo() . "<br>";
-}
+</html>
