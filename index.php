@@ -23,15 +23,11 @@ class Movie
 }
 
 
-$movie1 = new Movie("Kill Bill: Volume 1", "Quentin Tarantino", 2003);
-$movie2 = new Movie("The Matrix", "the Wachowskis", 1999);
+$movies = [];
 
+$movies[] = new Movie("Kill Bill: Volume 1", "Quentin Tarantino", 2003);
+$movies[] = new Movie("The Matrix", "the Wachowskis", 1999);
 
-$movieInfo = $movie1->getMovieInfo();
-
-
-$movieInfo = $movie2->getMovieInfo();
-
-
-
-echo $movieInfo;
+foreach ($movies as $movie) {
+    echo $movie->getMovieInfo() . "<br>";
+}
